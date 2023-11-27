@@ -1,0 +1,12 @@
+<p>add-film works!</p>
+
+<form [formGroup]="filmForm" (ngSubmit)="onSubmit()">
+
+    <label for="id">ID</label>
+    <input id="id" type="text" formControlName="id">
+
+    <label for="title">Title</label>
+    <input id="title" type="text" formControlName="title">
+    
+    <button type="submit">Submit</button>
+</form>
