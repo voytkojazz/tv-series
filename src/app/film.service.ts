@@ -40,12 +40,20 @@ export class FilmService {
 
   async addShow(id: string, title: string) {
     const tvmazeResponse$ = this.tvmaze.singleShowSearch(title)
-    tvmazeResponse$.subscribe(next => console.log(next))
-    const docRef = await addDoc(collection(this.dbService.db, "table-show"), {
-      id: id,
-      title: title
-    }).catch(e => console.log("error", e))
-    console.log(docRef)
+    tvmazeResponse$.subscribe({
+      next: async (next) => {
+        console.log(next)
+        const docRef = await addDoc(collection(this.dbService.db, "table-show"), {
+          id: id,
+          title: title
+        }).catch(e => console.log("error", e))
+        console.log(docRef)
+      },
+      error: (err) => {
+        console.log('cathed error', err)
+      }
+    })
+    return tvmazeResponse$;
   }
 
   getShows() {
@@ -55,7 +63,10 @@ export class FilmService {
 
   private _getShows(): Observable<Show[]> {
     console.log('trying to construct observable')
-    const q = query(collection(this.dbService.db, "table-show")).withConverter(showConverter)
+
+    const q = query(collection(this.dbService.db, "table-show"))
+      .withConverter(showConverter)
+
     const show$ = new Observable<Show[]>(observer => {
       console.log('constructing observable')
       const unsubscribe = onSnapshot(collection(this.dbService.db, "table-show"), snap => {
@@ -79,7 +90,7 @@ export class FilmService {
   async deleteShow(docId: string): Promise<boolean> {
     console.log(docId)
     return await deleteDoc(doc(this.dbService.db, "table-show", docId))
-    .then(() => true)
-    .catch(err => false)
+      .then(() => true)
+      .catch(err => false)
   }
 }

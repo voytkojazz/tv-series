@@ -1,0 +1,5 @@
+<dialog (close)="markClosed()" #appDialog class="resultDialog">
+    <h3>{{dialogTitle}}</h3>
+    <ng-content></ng-content>
+    <button (click)="closeModal()">Schließen</button>
+</dialog>

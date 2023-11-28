@@ -15,11 +15,9 @@ export class TvmazeService {
   }
 
   singleShowSearch(query: string): Observable<Object> {
-  
     const response$ = this.client.get(`${this.API_URL}singlesearch/shows`, {
       params: {q: query}
     })
-    console.log(response$)
     return response$
   }
 

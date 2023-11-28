@@ -31,7 +31,9 @@
         </tbody>
     </table>
 
-    
+    <app-modal [isOpen]="feedbackOpen" [dialogTitle]="feedbackTitle">
+        {{feedbackMessage}}
+    </app-modal>
 
     <app-add-film (addingFilm)="addFilm($event)"></app-add-film>
 </div>
