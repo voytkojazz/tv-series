@@ -45,7 +45,8 @@ export class FilmService {
         console.log(next)
         const docRef = await addDoc(collection(this.dbService.db, "table-show"), {
           id: id,
-          title: title
+          title: title,
+          mazeId: next.id
         }).catch(e => console.log("error", e))
         console.log(docRef)
       },

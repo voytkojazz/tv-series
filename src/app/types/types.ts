@@ -4,6 +4,16 @@ export interface Show {
     title: string
 }
 
+export interface MazeShowResponse {
+    id: string
+    image: MazeShowImageResposne
+}
+
+export interface MazeShowImageResposne {
+    medium?: string
+    original?: string
+}
+
 export interface FirebaseConfig {
     apiKey: string
     authDomain: string

@@ -1,6 +1,7 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { MazeShowResponse } from './types/types';
 
 @Injectable({
   providedIn: 'root'
@@ -14,8 +15,8 @@ export class TvmazeService {
     this.client = client
   }
 
-  singleShowSearch(query: string): Observable<Object> {
-    const response$ = this.client.get(`${this.API_URL}singlesearch/shows`, {
+  singleShowSearch(query: string): Observable<MazeShowResponse> {
+    const response$ = this.client.get<MazeShowResponse>(`${this.API_URL}singlesearch/shows`, {
       params: {q: query}
     })
     return response$
