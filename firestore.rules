@@ -13,11 +13,13 @@ service cloud.firestore {
     // all client requests to your Firestore database will be denied until you Update
     // your rules
     match /table-show/{document=**} {
-      allow create, update: if request.resource.data.id is number 
+      allow create, update: if request.resource.data.id is string 
+        && !exists(/databases/$(database)/documents/table-show/$(request.resource.data.id))
         && request.resource.data.title is string 
         && request.resource.data.mazeId != null 
         && request.resource.data.mazeId is string
       allow read: if true
+      allow delete: if true
     }
 
   }

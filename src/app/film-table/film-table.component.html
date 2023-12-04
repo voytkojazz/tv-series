@@ -1,5 +1,4 @@
 <div class="film-table-wrapper">
-    <p>film-table works!</p>
 
     <table>
         <thead>
@@ -17,17 +16,23 @@
         </thead>
         <tbody>
             @if (films.length > 0) {
-                @for (film of films; track $index) {
-                    
-                    <tr>
-                        <td>{{film.id}}</td>
-                        <td>{{ film.title }}</td>
-                        <td>
-                            <button (click)="deleteShow(film.docId ?? '')">Delete</button>
-                        </td>
-                    </tr>
+                @for ( film of films ; track $index) {
+
+                    @if (filmToEdit == film) {
+                        <tr app-edit-film-form [film]="filmToEdit" (onFilmUpdated)="handleFilmUpdated($event)"></tr>
+                    } @else {
+                        <tr>
+                            <td>{{film.id}}</td>
+                            <td>{{ film.title }}</td>
+                            <td>
+                                <button (click)="deleteShow(film.docId ?? '')">Delete</button>
+                                <button (click)="editFilm(film)">Edit</button>
+                            </td>
+                        </tr>
+                    }
                 }
             }
+           
         </tbody>
     </table>
 

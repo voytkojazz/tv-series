@@ -1,7 +1,8 @@
 export interface Show {
     docId?: string,
     id: string,
-    title: string
+    title: string,
+    mazeId? : string 
 }
 
 export interface MazeShowResponse {
