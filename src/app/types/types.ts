@@ -5,6 +5,12 @@ export interface Show {
     mazeId? : string 
 }
 
+export type EditSuccess = true
+export type EditFailure = false
+export type EditCancel = null
+
+export type EditResult = EditSuccess | EditFailure | EditCancel
+
 export interface MazeShowResponse {
     id: string
     image: MazeShowImageResposne

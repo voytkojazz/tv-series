@@ -2,13 +2,13 @@ import { Component, OnInit, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FilmService } from '../film.service';
 import { AddFilmComponent } from '../add-film/add-film.component';
-import { Show } from '../types/types';
+import { EditResult, Show, EditCancel } from '../types/types';
 import { FilmRowComponent } from '../film-row/film-row.component';
 import { ModalComponent } from '../modal/modal.component';
 import { EditFilmFormComponent } from '../edit-film-form/edit-film-form.component';
 
 @Component({
-  selector: 'app-film-table',
+  selector: '[app-film-table]',
   standalone: true,
   imports: [CommonModule, AddFilmComponent, FilmRowComponent, ModalComponent, EditFilmFormComponent],
   templateUrl: './film-table.component.html',
@@ -61,18 +61,24 @@ export class FilmTableComponent implements OnInit {
     this.filmToEdit = film
   }
 
-  handleFilmUpdated(result: boolean) {
-    console.log('recieved update show event result value! ', result)
-    if(result) {
-      this.feedbackTitle = "Success!"
-      this.feedbackMessage = "Successfuly updated!"
-    } else {
-      this.feedbackTitle = "Failure!"
-      this.feedbackMessage = "Could not update!"
-    }
-    this.feedbackOpen.set(true)
-    this.filmToEdit = null
+  handleFilmUpdated(result: EditResult) {
+    console.log('received update show event result value! ', result);
+    this.filmToEdit = null;
+    if (result == null) return;
+    this.updateFeedback(result);
+    this.feedbackOpen.set(true);
   }
+
+  private updateFeedback(result: EditResult) {
+    if (result == true) {
+      this.feedbackTitle = "Success!";
+      this.feedbackMessage = "Successfully updated!";
+    } else {
+      this.feedbackTitle = "Failure!";
+      this.feedbackMessage = "Could not update!";
+    }
+  }
+
 
   get shows() {
     return this.films

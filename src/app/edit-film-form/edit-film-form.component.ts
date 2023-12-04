@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
-import { Show } from '../types/types';
+import { EditResult, Show } from '../types/types';
 import { FilmService } from '../film.service';
 
 @Component({
@@ -9,7 +9,7 @@ import { FilmService } from '../film.service';
   standalone: true,
   imports: [CommonModule, ReactiveFormsModule],
   templateUrl: './edit-film-form.component.html',
-  styleUrl: './edit-film-form.component.scss'
+  styleUrls: ['../../styles.scss', './edit-film-form.component.scss']
 })
 export class EditFilmFormComponent implements OnInit {
 
@@ -18,7 +18,7 @@ export class EditFilmFormComponent implements OnInit {
     this.title = new FormControl(this.film.title)
   }
 
-  @Output() onFilmUpdated = new EventEmitter<boolean>()
+  @Output() onFilmUpdated = new EventEmitter<EditResult>()
   @Input() film: Show = { id: '', title: '', docId: '' }
 
 
@@ -44,13 +44,13 @@ export class EditFilmFormComponent implements OnInit {
         },
         error: (err) => {
           this.onFilmUpdated.emit(false)
-          console.log("catched error in observable")
+          console.log("catched error in observable, ", err)
         }
       })
   }
 
   cancelEdit() {
-    this.onFilmUpdated.emit(false)
+    this.onFilmUpdated.emit(null)
   }
 
 }

@@ -1,7 +1,7 @@
 import { Injectable, NgZone, inject } from '@angular/core';
 import { collection, query, addDoc, onSnapshot, DocumentData, QueryDocumentSnapshot, SnapshotOptions, FirestoreDataConverter, deleteDoc, doc, where, updateDoc } from "firebase/firestore";
 import { DbService } from './db.service';
-import { Observable, map, mergeMap } from 'rxjs';
+import { Observable, Subject, map, mergeMap } from 'rxjs';
 import { Show } from './types/types';
 import { TvmazeService } from './tvmaze.service';
 import { FirebaseError } from 'firebase/app';
@@ -34,6 +34,8 @@ export class FilmService {
   dbService
   tvmaze
   ngZone = inject(NgZone)
+  filmSubject = new Subject<Show[]>()
+  film$ = this.filmSubject.asObservable()
 
   constructor(dbService: DbService, tvmaze: TvmazeService) {
     this.dbService = dbService
@@ -74,23 +76,20 @@ export class FilmService {
   private _getShows(): Observable<Show[]> {
     const q = query(collection(this.dbService.db, "table-show"))
       .withConverter(showConverter)
-    const show$ = new Observable<Show[]>(observer => {
-      console.log('constructing observable')
-      const unsubscribe = onSnapshot(collection(this.dbService.db, "table-show"), snap => {
-        const shows: Show[] = []
-        snap.docs.forEach(doc => {
-          shows.push(showConverter.fromFirestore(doc))
-        })
-        observer.next(shows)
-      }, error => {
-        console.error("error", error)
-        observer.error(error)
-        return error
+
+    const unsubscribe = onSnapshot(collection(this.dbService.db, "table-show"), snap => {
+      const shows: Show[] = []
+      snap.docs.forEach(doc => {
+        shows.push(showConverter.fromFirestore(doc))
       })
-      return unsubscribe
+      this.filmSubject.next(shows)
+    }, error => {
+      console.error("error", error)
+      this.filmSubject.error(error)
     })
-    return show$
+    return this.film$
   }
+
 
   async deleteShow(docId: string): Promise<boolean> {
     console.log(docId)

@@ -8,7 +8,7 @@ import { FilmTableComponent } from './film-table/film-table.component';
   standalone: true,
   imports: [CommonModule, RouterOutlet, FilmTableComponent],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.scss'
+  styleUrls: ['./app.component.scss', '../styles.scss']
 })
 export class AppComponent {
   title = 'tv-series';

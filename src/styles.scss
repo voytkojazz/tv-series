@@ -1,4 +1,59 @@
 /* You can add global styles to this file, and also import other style files */
 main {
-    display: flex;
+  display: flex;
+}
+
+$highlight-color: #f0f0f0;
+$primary-button-color: #4CAF50;
+$danger-button-color: #f44336;
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 20px 0;
+
+  th,
+  td {
+    padding: 10px;
+    border: 1px solid #ddd;
+    text-align: left;
+  }
+
+  input {
+    width: 100%;
+    max-width: 80%;
+    padding: 5px;
+  }
+
+  .active-row {
+    background-color: $highlight-color;
+  }
+}
+
+button {
+  padding: 5px 10px;
+  color: white;
+  border: none;
+  cursor: pointer;
+
+  &:hover {
+    background-color: #45a049;
+  }
+
+  &.primary {
+    background-color: $primary-button-color;
+
+    &:hover {
+      background-color: #45a049;
+    }
+  }
+
+  &.danger {
+    background-color: $danger-button-color;
+
+    &:hover {
+      background-color: #a94442;
+    }
+  }
+
 }
