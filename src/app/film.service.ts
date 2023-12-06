@@ -63,7 +63,7 @@ export class FilmService {
     }
 
     getShows() {
-        const shows = this.ngZone.runTask(() => this._getShows())
+        const shows = this._getShows()
         return shows
     }
 

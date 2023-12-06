@@ -1,20 +1,46 @@
 $danger-button-color: #f44336;
 
+:host {
+    flex-basis: 50%;
+}
 
 .details-container {
-    flex-basis: 50%;
     padding: 0 10px;
 
     .content {
+        display: flex;
+        flex-direction: column;
         overflow: auto;
         margin: 0 0.6em;
         border-radius: 10px;
-        background-color: #eeeeee;
+        background-color: #F9F9F9;
 
         p, h3, h5 {
-            margin: 0 0 0.5em 0.5em;
+            margin: 5px;
         }
 
+        h3, h5 {
+            text-transform: uppercase;
+        }
+
+        .image-summary-container {
+            display: flex;
+            flex-direction: row;
+        }
+
+        img {
+            width: 30%; 
+            margin-right: 5px;
+            margin-bottom: 5px;
+            margin-left: 5px;
+            box-shadow: 0 0 15px 5px rgba(0, 0, 0, 0.132);
+        }
+
+        button {
+            width: 100%;
+            border-bottom-left-radius: inherit;
+            border-bottom-right-radius: inherit;
+        }
 
     }
 
@@ -29,30 +55,6 @@ $danger-button-color: #f44336;
         margin-bottom: 0.5em;
         text-align: center;
 
-        .close-button {
-            background-color: $danger-button-color;
-            float: left;
-            margin-right: 5px;
-            margin-left: 5px;
-            height: 15px;
-            box-shadow: 0 0 15px 5px rgba(0, 0, 0, 0.132);
-            border-radius: 50%;
-
-            &:hover {
-                background-color: rgb(184, 0, 3);
-            }
-        }
     }
 
-    img {
-        float: right;
-        margin-right: 5px;
-        margin-bottom: 5px;
-        margin-left: 5px;
-        box-shadow: 0 0 15px 5px rgba(0, 0, 0, 0.132);
-    }
-}
-
-:host {
-    flex-basis: 50%;
 }
