@@ -7,6 +7,10 @@ $highlight-color: #f0f0f0;
 $primary-button-color: #4CAF50;
 $danger-button-color: #f44336;
 
+h3 {
+    margin: 5px;
+}
+
 table {
   width: 100%;
   border-collapse: collapse;
@@ -17,6 +21,12 @@ table {
     padding: 10px;
     border: 1px solid #ddd;
     text-align: left;
+    width: 33%;
+
+    &:title {
+      text-decoration: underline;
+    }
+
   }
 
   input {

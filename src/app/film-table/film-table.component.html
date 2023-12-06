@@ -1,3 +1,4 @@
+<app-add-film (addingFilm)="addFilm($event)"></app-add-film>
 
     <table>
         <thead>
@@ -21,8 +22,8 @@
                         <tr app-edit-film-form [film]="filmToEdit" (onFilmUpdated)="handleFilmUpdated($event)"></tr>
                     } @else {
                         <tr>
-                            <td>{{film.id}}</td>
-                            <td>{{ film.title }}</td>
+                            <td (dblclick)="navigateToFilm(film.mazeId)">{{film.id}}</td>
+                            <td (dblclick)="navigateToFilm(film.mazeId)">{{ film.title }}</td>
                             <td>
                                 <button class="danger" (click)="deleteShow(film.docId ?? '')">Delete</button>
                                 <button class="primary" (click)="editFilm(film)">Edit</button>
@@ -39,4 +40,3 @@
         {{feedbackMessage}}
     </app-modal>
 
-    <app-add-film (addingFilm)="addFilm($event)"></app-add-film>

@@ -22,4 +22,9 @@ export class TvmazeService {
     return response$
   }
 
+  getById(id: string): Observable<MazeShowResponse> {
+    const response$ = this.client.get<MazeShowResponse>(`${this.API_URL}shows/${id}`)
+    return response$
+  }
+
 }

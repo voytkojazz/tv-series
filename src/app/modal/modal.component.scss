@@ -1,6 +1,15 @@
 .resultDialog {
 
+    border: none;
+
+    button {
+        margin-top: em;
+        display: block;
+    }
+
     &::backdrop {
         background-color: rgba($color: rgb(9, 49, 122), $alpha: 0.2)
     }
+
+    
 }

@@ -1,4 +1,5 @@
-<form [formGroup]="filmForm" (ngSubmit)="onSubmit()">
+<div class="add-film-container">
+    <form [formGroup]="filmForm" (ngSubmit)="onSubmit()">
 
     <label for="id">ID</label>
     <input id="id" type="text" formControlName="id">
@@ -8,3 +9,4 @@
     
     <button class="primary" type="submit">Submit</button>
 </form>
+</div>

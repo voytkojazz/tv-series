@@ -13,7 +13,9 @@ export type EditResult = EditSuccess | EditFailure | EditCancel
 
 export interface MazeShowResponse {
     id: string
+    name: string
     image: MazeShowImageResposne
+    summary: string
 }
 
 export interface MazeShowImageResposne {
