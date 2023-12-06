@@ -21,13 +21,27 @@
                     @if (filmToEdit == film) {
                         <tr app-edit-film-form [film]="filmToEdit" (onFilmUpdated)="handleFilmUpdated($event)"></tr>
                     } @else {
-                        <tr>
-                            <td (dblclick)="navigateToFilm(film.mazeId)">{{film.id}}</td>
-                            <td (dblclick)="navigateToFilm(film.mazeId)">{{ film.title }}</td>
+                        <tr [class.selected]="currentOpenId === film.docId"
+    
+                        >
+
+                            <td (dblclick)="navigateToFilm(film.mazeId, film.docId)">
+                                {{film.id}}
+                            </td>
+
+                            <td (dblclick)="navigateToFilm(film.mazeId, film.docId)" class="title"
+                                (mouseenter)="hoverFilm(film.docId, $event)" 
+                                (mouseleave)="hoverFilm(null, null)"
+                            >
+                                <app-popover [x]="x" [y]="y" [state]="hoveredFilm == film.docId ? 'in' : 'out'" message="Double click to open or close show"></app-popover>
+                                {{ film.title }}
+                            </td>
+                            
                             <td>
                                 <button class="danger" (click)="deleteShow(film.docId ?? '')">Delete</button>
                                 <button class="primary" (click)="editFilm(film)">Edit</button>
                             </td>
+
                         </tr>
                     }
                 }

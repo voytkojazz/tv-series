@@ -7,10 +7,17 @@
                 {{showDetails?.name}}
             </h3>
         </div>
-        <img [src]="showDetails?.image?.medium" alt="">
-        <h5>Summary: </h5>
-        <p [innerHTML]="showDetails?.summary"></p>
-        <button (click)="closeDetails()">Close</button>
+        
+        <div class="image-summary-container">
+            <div>
+                <h5>Summary: </h5>
+                <p [innerHTML]="showDetails?.summary"></p>
+            </div>
+
+            <img [src]="showDetails?.image?.medium" alt="">
+        </div>
+
+        <button class="primary-outlined close-btn" (click)="closeDetails()">Close</button>
     </div>
 
 

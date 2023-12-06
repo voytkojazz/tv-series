@@ -1,0 +1,14 @@
+// :host {
+//     position: relative;
+// }
+
+.popover {
+    width: 150px;
+    position: absolute;
+    border: 1px solid #ccc;
+    padding: 10px;
+    background-color: #fff;
+    opacity: inherit;
+    z-index: 1;
+    font-size: 0.7em;
+}

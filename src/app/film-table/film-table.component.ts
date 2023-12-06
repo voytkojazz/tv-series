@@ -7,11 +7,13 @@ import { FilmRowComponent } from '../film-row/film-row.component';
 import { ModalComponent } from '../modal/modal.component';
 import { EditFilmFormComponent } from '../edit-film-form/edit-film-form.component';
 import { Router, RouterLink } from '@angular/router';
+import { SharedFilmTableService } from '../shared-film-table.service';
+import { PopoverComponent } from '../popover/popover.component';
 
 @Component({
     selector: '[app-film-table]',
     standalone: true,
-    imports: [CommonModule, AddFilmComponent, FilmRowComponent, ModalComponent, EditFilmFormComponent, RouterLink],
+    imports: [CommonModule, AddFilmComponent, FilmRowComponent, ModalComponent, EditFilmFormComponent, RouterLink, PopoverComponent],
     templateUrl: './film-table.component.html',
     styleUrl: './film-table.component.scss'
 })
@@ -24,10 +26,24 @@ export class FilmTableComponent implements OnInit {
     feedbackMessage: string = ''
     filmToEdit: Show | null = null
     router: Router
+    currentOpenId: string | null = null
+    sharedFilmService: SharedFilmTableService
+    hoveredFilm?: string | null = null
 
-    constructor(filmService: FilmService, router: Router) {
+    x: number = 0
+    y: number = 0
+
+    constructor(filmService: FilmService, router: Router, sharedFilmService: SharedFilmTableService) {
         this.filmService = filmService
         this.router = router
+        this.sharedFilmService = sharedFilmService
+        this.sharedFilmService.unselectRow.subscribe({
+            next: (next: boolean) => {
+                if (next == true) {
+                    this.currentOpenId = null
+                }
+            }
+        })
     }
 
     ngOnInit(): void {
@@ -79,10 +95,32 @@ export class FilmTableComponent implements OnInit {
         }
     }
 
-    navigateToFilm(mazeId: string | undefined) {
+    navigateToFilm(mazeId: string | undefined, docId?: string) {
         if (mazeId == undefined) return
-        this.router.navigate(['/details', mazeId])
+        if (docId == this.currentOpenId) {
+            this.currentOpenId = null
+            this.router.navigate([''])
+            return
+        } else {
+            this.markAsOpen(docId)
+            this.router.navigate(['/details', mazeId])
+        }
     }
+
+    markAsOpen(id?: string) {
+        if (id == undefined) return
+        this.currentOpenId = id
+    }
+
+    hoverFilm(filmId?: string | null, event?: MouseEvent | null) {
+        if (event != null) {
+          this.x = event.clientX;
+          this.y = event.clientY;
+          this.hoveredFilm = filmId;
+        } else {
+          this.hoveredFilm = null;
+        }
+      }
 
 
     get shows() {

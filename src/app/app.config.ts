@@ -5,6 +5,7 @@ import { routes } from './app.routes';
 import { provideClientHydration } from '@angular/platform-browser';
 import { FirebaseConfig } from './types/types';
 import { provideHttpClient, withFetch } from '@angular/common/http';
+import { provideAnimations } from '@angular/platform-browser/animations';
 
 
 export const FIREBASE_CONFIG = new InjectionToken<FirebaseConfig>("app.config firebase")
@@ -21,6 +22,7 @@ export const firebaseConfig: FirebaseConfig = {
 export const appConfig: ApplicationConfig = {
   providers: [
     provideHttpClient(withFetch()),
+    provideAnimations(),
     provideRouter(routes),
     provideClientHydration(),
   ],

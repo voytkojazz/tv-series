@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MazeShowResponse, Show } from '../types/types';
 import { TvmazeService } from '../tvmaze.service';
 import { Observable } from 'rxjs';
+import { SharedFilmTableService } from '../shared-film-table.service';
 
 @Component({
   selector: '[app-film-details]',
@@ -16,13 +17,15 @@ export class FilmDetailsComponent {
 
     id: string | null = null
     mazeService: TvmazeService
+    sharedFilmService: SharedFilmTableService
     show: Observable<MazeShowResponse> | null = null
     showDetails: MazeShowResponse | null = null
     router: Router
 
-    constructor(route: ActivatedRoute, mazeService: TvmazeService, router: Router) {
+    constructor(route: ActivatedRoute, mazeService: TvmazeService, router: Router, sharedFilmService: SharedFilmTableService) {
         this.mazeService = mazeService
         this.router = router
+        this.sharedFilmService = sharedFilmService
         route.paramMap.subscribe(params => {
             this.id = params.get('id')
             this.loadFilm()
@@ -41,6 +44,7 @@ export class FilmDetailsComponent {
 
     closeDetails() {
         console.log('closing details')
+        this.sharedFilmService.closeDetails()
         this.router.navigate([''])
     }
 

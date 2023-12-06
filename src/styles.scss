@@ -1,9 +1,10 @@
 /* You can add global styles to this file, and also import other style files */
 main {
   display: flex;
+  box-sizing: border-box;
 }
 
-$highlight-color: #f0f0f0;
+$highlight-color: #f3f3f3;
 $primary-button-color: #4CAF50;
 $danger-button-color: #f44336;
 
@@ -12,18 +13,29 @@ h3 {
 }
 
 table {
+
   width: 100%;
   border-collapse: collapse;
   margin: 20px 0;
+  box-sizing: border-box;
+
+  tr:hover {
+    background-color: $highlight-color;
+    border-bottom: rgba(137, 43, 226, 0.281) 2px solid;
+  }
+
+  tr.selected {
+    border-bottom: blueviolet 3px solid;
+  }
 
   th,
   td {
     padding: 10px;
-    border: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
     text-align: left;
     width: 33%;
 
-    &:title {
+    &.title {
       text-decoration: underline;
     }
 
@@ -48,6 +60,17 @@ button {
 
   &:hover {
     background-color: #45a049;
+  }
+
+  &.primary-outlined {
+    background-color: transparent;
+    color: $primary-button-color;
+    border: 1px solid $primary-button-color;
+
+    &:hover {
+      background-color: $primary-button-color;
+      color: white;
+    }
   }
 
   &.primary {
