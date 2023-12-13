@@ -11,6 +11,11 @@ export type EditCancel = null
 
 export type EditResult = EditSuccess | EditFailure | EditCancel
 
+export interface MazeMultiShowResponse {
+    score: number
+    show: MazeShowResponse
+}
+
 export interface MazeShowResponse {
     id: string
     name: string

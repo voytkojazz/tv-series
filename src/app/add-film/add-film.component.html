@@ -5,7 +5,14 @@
     <input id="id" type="text" formControlName="id">
 
     <label for="title">Title</label>
-    <input id="title" type="text" formControlName="title">
+
+    <input list="film-options" id="title" type="text" formControlName="title" [matAutocomplete]="filmList">
+
+    <mat-autocomplete #filmList="matAutocomplete">
+        @for (film of filmOptions; track film) {
+          <mat-option [value]="film.show.name">{{film.show.name}}</mat-option>
+        }
+      </mat-autocomplete>
     
     <button class="primary" type="submit">Submit</button>
 </form>
