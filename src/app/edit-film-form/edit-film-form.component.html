@@ -1,10 +1,14 @@
 <td>
-  <input type="text" id="edit-film-id" type="text" [formControl]="id">
+    <input type="text" id="edit-film-id" type="text" [formControl]="id">
 </td>
 <td>
-  <input type="text" id="edit-film-title" type="text" [formControl]="title">
+    <input type="text" id="edit-film-title" type="text" [formControl]="title">
 </td>
 <td>
-  <button class="primary" (click)="submitUpdate()">Update</button>
-  <button class="danger" (click)="cancelEdit()">Cancel</button>
+    <button class="icon-button" (click)="submitUpdate()">
+        <span class="material-symbols-outlined icon-primary">edit</span>
+    </button>
+    <button class="icon-button" (click)="cancelEdit()">
+        <span class="material-symbols-outlined icon-danger">cancel</span>
+    </button>
 </td>

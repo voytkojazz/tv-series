@@ -1,11 +1,11 @@
 /* You can add global styles to this file, and also import other style files */
 main {
-  display: flex;
-  box-sizing: border-box;
+    display: flex;
+    box-sizing: border-box;
 }
 
 $highlight-color: #f3f3f3;
-$primary-button-color: #4CAF50;
+$primary-button-color: #4caf50;
 $danger-button-color: #f44336;
 
 h3 {
@@ -13,80 +13,113 @@ h3 {
 }
 
 table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    box-sizing: border-box;
 
-  width: 100%;
-  border-collapse: collapse;
-  margin: 20px 0;
-  box-sizing: border-box;
-
-  tr:hover {
-    background-color: $highlight-color;
-    border-bottom: rgba(137, 43, 226, 0.281) 2px solid;
-  }
-
-  tr.selected {
-    border-bottom: blueviolet 3px solid;
-  }
-
-  th,
-  td {
-    padding: 10px;
-    border-bottom: 1px solid #ddd;
-    text-align: left;
-    width: 33%;
-
-    &.title {
-      text-decoration: underline;
+    tr:hover {
+        background-color: $highlight-color;
+        border-bottom: rgba(137, 43, 226, 0.281) 2px solid;
     }
 
-  }
+    tr.selected {
+        border-bottom: blueviolet 3px solid;
+    }
 
-  input {
-    width: 100%;
-    max-width: 80%;
-    padding: 5px;
-  }
+    th,
+    td {
+        padding: 10px;
+        border-bottom: 1px solid #ddd;
+        text-align: left;
+        width: 33%;
 
-  .active-row {
-    background-color: $highlight-color;
-  }
+        &.title {
+            text-decoration: underline;
+        }
+    }
+
+    input {
+        width: 100%;
+        max-width: 80%;
+        padding: 5px;
+    }
+
+    .active-row {
+        background-color: $highlight-color;
+    }
+}
+
+.icon-button {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    width: 2em;
+    &:hover {
+        background-color: #ddd;
+    }
 }
 
 button {
-  padding: 5px 10px;
-  color: white;
-  border: none;
-  cursor: pointer;
+    padding: 5px 10px;
+    color: white;
+    border: none;
+    cursor: pointer;
 
-  &:hover {
-    background-color: #45a049;
-  }
+    &:hover {
+        background-color: #45a049;
+    }
 
-  &.primary-outlined {
-    background-color: transparent;
+    &.primary-outlined {
+        background-color: transparent;
+        color: $primary-button-color;
+        border: 1px solid $primary-button-color;
+
+        &:hover {
+            background-color: $primary-button-color;
+            color: white;
+        }
+    }
+
+    &.primary {
+        background-color: $primary-button-color;
+
+        img {
+            width: 20px;
+            height: 20px;
+            color: white;
+        }
+
+        &:hover {
+            background-color: #45a049;
+        }
+    }
+
+    &.danger {
+        background-color: $danger-button-color;
+
+        &:hover {
+            background-color: #a94442;
+        }
+    }
+}
+
+.material-symbols-outlined {
+    color: aliceblue;
+    font-variation-settings:
+        "FILL" 0,
+        "wght" 320,
+        "GRAD" 0,
+        "opsz" 22;
+}
+
+.icon-danger {
+    height: 10px;
+    color: red;
+}
+
+.icon-primary {
+    height: 10px;
     color: $primary-button-color;
-    border: 1px solid $primary-button-color;
-
-    &:hover {
-      background-color: $primary-button-color;
-      color: white;
-    }
-  }
-
-  &.primary {
-    background-color: $primary-button-color;
-
-    &:hover {
-      background-color: #45a049;
-    }
-  }
-
-  &.danger {
-    background-color: $danger-button-color;
-
-    &:hover {
-      background-color: #a94442;
-    }
-  }
-
 }

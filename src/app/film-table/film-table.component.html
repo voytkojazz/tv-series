@@ -1,5 +1,4 @@
 <app-add-film (addingFilm)="addFilm($event)"></app-add-film>
-
     <table>
         <thead>
             <tr>
@@ -38,8 +37,12 @@
                             </td>
                             
                             <td>
-                                <button class="danger" (click)="deleteShow(film.docId ?? '')">Delete</button>
-                                <button class="primary" (click)="editFilm(film)">Edit</button>
+                                <button class="icon-button" (click)="deleteShow(film.docId ?? '')">
+                                    <span class="material-symbols-outlined icon-danger">delete</span>
+                                </button>
+                                <button class="icon-button" (click)="editFilm(film)">
+                                    <span class="material-symbols-outlined icon-primary">edit</span>
+                                </button>
                             </td>
 
                         </tr>
